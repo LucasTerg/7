@@ -6,9 +6,12 @@ import './src/styles.css'
 
 const App = () => {
     const defaultUrl = 'https://filedn.eu/lPq6O1K7j8DR1n7JwTuYjYz/7ooOOKjskks39jdhhdooommcooodkkywrrqbnx.mp4'
+    const posterImages = ['./src/img/1.webp', './src/img/2.webp', './src/img/3.webp']
+    const getRandomPoster = () => posterImages[Math.floor(Math.random() * posterImages.length)]
     const [theme, setTheme] = useState('dark')
     const [videoUrl, setVideoUrl] = useState('')
     const [currentVideoUrl, setCurrentVideoUrl] = useState(defaultUrl)
+    const [posterUrl, setPosterUrl] = useState(getRandomPoster())
     const fileInputRef = useRef(null)
     const dropZoneRef = useRef(null)
 
@@ -31,6 +34,7 @@ const App = () => {
 
     const loadVideo = () => {
         setCurrentVideoUrl(videoUrl || defaultUrl)
+        setPosterUrl(getRandomPosterUrl)
     }
 
     const handleKeyPress = event => {
@@ -44,6 +48,7 @@ const App = () => {
         if (file) {
             const fileUrl = URL.createObjectURL(file)
             setCurrentVideoUrl(fileUrl)
+            setPosterUrl(getRandomPoster())
         }
     }
 
@@ -53,6 +58,7 @@ const App = () => {
         if (file) {
             const fileUrl = URL.createObjectURL(file)
             setCurrentVideoUrl(fileUrl)
+            setPosterUrl(getRandomPoster())
         }
     }
 
@@ -61,49 +67,42 @@ const App = () => {
     }
 
     return (
-        <div className='app'>
-            <h1></h1>
-            <div className='video-url-input'>
-                <input
-                    type='text'
-                    value={videoUrl}
-                    onChange={handleUrlChange}
-                    onMouseEnter={handleInputHover}
-                    onKeyPress={handleKeyPress}
-                    placeholder='Wentyluj frustrację, wklej link do filmu!'
-                />
-                <button onClick={loadVideo}>Załaduj</button>
-            </div>
-            <div className='video-player'>
-                <video controls key={currentVideoUrl}>
-                    <source src={currentVideoUrl} type='video/mp4' />
-                    Twoja przeglądarka nie obsługuje odtwarzacza wideo.
-                </video>
-            </div>
-            <div className='controls'>
-                <ThemeSwitcher setTheme={setTheme} />
-                <DownloadButton videoUrl={currentVideoUrl} />
-            </div>
-            <div 
-                className='file-drop-zone' 
-                ref={dropZoneRef}
-                onDrop={handleDrop}
-                onDragOver={handleDragOver}
-            >
-                <p>Przeciągnij i upuść plik wideo tutaj lub</p>
-                <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleFileSelect}
-                    accept="video/*"
-                    style={{ display: 'none' }}
-                />
-                <button onClick={() => fileInputRef.current.click()}>
-                    Wybierz plik
-                </button>
-            </div>
-        </div>
-    )
+			<div className='app'>
+				<h1></h1>
+				<div className='video-url-input'>
+					<input
+						type='text'
+						value={videoUrl}
+						onChange={handleUrlChange}
+						onMouseEnter={handleInputHover}
+						onKeyPress={handleKeyPress}
+						placeholder='Wentyluj frustrację, wklej link do filmu!'
+					/>
+					<button onClick={loadVideo}>Załaduj</button>
+				</div>
+				<div className='video-player'>
+					<video controls key={currentVideoUrl} poster={posterUrl}>
+						<source src={currentVideoUrl} type='video/mp4' />
+						Twoja przeglądarka nie obsługuje odtwarzacza wideo.
+					</video>
+				</div>
+				<div className='controls'>
+					<ThemeSwitcher setTheme={setTheme} />
+					<DownloadButton videoUrl={currentVideoUrl} />
+				</div>
+				<div className='file-drop-zone' ref={dropZoneRef} onDrop={handleDrop} onDragOver={handleDragOver}>
+					<p>Przeciągnij i upuść plik wideo tutaj lub</p>
+					<input
+						type='file'
+						ref={fileInputRef}
+						onChange={handleFileSelect}
+						accept='video/*'
+						style={{ display: 'none' }}
+					/>
+					<button onClick={() => fileInputRef.current.click()}>Wybierz plik</button>
+				</div>
+			</div>
+		)
 }
 
 export default App
