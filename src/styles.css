@@ -59,59 +59,61 @@ body.sepia {
     display: flex;
     margin-right: 10px;
 }
+
 .video-url-input {
-  display: flex;
-  max-width: 640px;
-  margin-bottom: 20px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+    display: flex;
+    max-width: 640px;
+    margin-bottom: 20px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .video-url-input input {
-  flex-grow: 1;
-  margin-right: 10px;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px 0 0 4px;
+    flex-grow: 1;
+    margin-right: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
 }
 
 .video-url-input button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 0 4px 4px 0;
-  cursor: pointer;
-  border: 1px outset rgb(208, 206, 204)
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    border: 1px outset rgb(208, 206, 204)
 }
 
 .video-url-input button:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 /* Dostosowanie kolorów inputu i przycisku do motywów */
 body.light .video-url-input input,
 body.light .video-url-input button {
-  background-color: #fff;
-  color: #333;
+    background-color: #fff;
+    color: #333;
 }
 
 body.dark .video-url-input input,
 body.dark .video-url-input button {
-  background-color: #555;
-  color: #fff;
-  border-color: #777;
+    background-color: #555;
+    color: #fff;
+    border-color: #777;
 }
 
 body.sepia .video-url-input input,
 body.sepia .video-url-input button {
-  background-color: #e8dcc5;
-  color: #5b4636;
-  border-color: #b0a18f;
+    background-color: #e8dcc5;
+    color: #5b4636;
+    border-color: #b0a18f;
 }
+
 .theme-switcher button,
 .download-button {
     padding: 5px 15px;
@@ -147,4 +149,58 @@ body.sepia .download-button {
     background-color: #a68b6b;
     color: white;
     border: 1px outset rgb(211, 129, 36);
+}
+
+/* Dodaj na końcu pliku */
+
+.file-drop-zone {
+    width: 100%;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.file-drop-zone:hover {
+    background-color: rgba(204, 204, 204, 0.1);
+}
+
+.file-drop-zone p {
+    margin-bottom: 20px;
+}
+
+.file-drop-zone button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.file-drop-zone button:hover {
+    background-color: #0056b3;
+}
+
+/* Dostosowanie kolorów do motywów */
+body.light .file-drop-zone {
+    border-color: #ccc;
+    color: #333;
+}
+
+body.dark .file-drop-zone {
+    border-color: #555;
+    color: #fff;
+}
+
+body.sepia .file-drop-zone {
+    border-color: #a68b6b;
+    color: #5a4a42;
 }
