@@ -5,29 +5,61 @@ import ThemeSwitcher from './src/components/ThemeSwitcher'
 import './src/styles.css'
 
 const App = () => {
+	const defaultUrl = 'https://filedn.eu/lPq6O1K7j8DR1n7JwTuYjYz/7ooOOKjskks39jdhhdooommcooodkkywrrqbnx.mp4'
 	const [theme, setTheme] = useState('dark')
+	const [videoUrl, setVideoUrl] = useState('')
+	const [currentVideoUrl, setCurrentVideoUrl] = useState(defaultUrl)
 
-	// Dodaj klasę motywu do <body>
 	useEffect(() => {
 		document.body.className = theme
 	}, [theme])
 
+	const handleUrlChange = event => {
+		setVideoUrl(event.target.value)
+	}
+
+	const handleInputHover = async () => {
+		try {
+			const text = await navigator.clipboard.readText()
+			setVideoUrl(text)
+		} catch (err) {
+			console.error('Failed to read clipboard contents: ', err)
+		}
+	}
+
+	const loadVideo = () => {
+		setCurrentVideoUrl(videoUrl || defaultUrl)
+	}
+
+	const handleKeyPress = event => {
+		if (event.key === 'Enter') {
+			loadVideo()
+		}
+	}
+
 	return (
 		<div className='app'>
 			<h1></h1>
+			<div className='video-url-input'>
+				<input
+					type='text'
+					value={videoUrl}
+					onChange={handleUrlChange}
+					onMouseEnter={handleInputHover}
+					onKeyPress={handleKeyPress}
+					placeholder='Wentyluj frustrację, wklej link do filmu!'
+				/>
+				<button onClick={loadVideo}>Załaduj</button>
+			</div>
 			<div className='video-player'>
-				<video controls>
-					<source
-						src='https://filedn.eu/lPq6O1K7j8DR1n7JwTuYjYz/7ooOOKjskks39jdhhdooommcooodkkywrrqbnx.mp4'
-						type='video/mp4'
-					/>
+				<video controls key={currentVideoUrl}>
+					<source src={currentVideoUrl} type='video/mp4' />
 					Twoja przeglądarka nie obsługuje odtwarzacza wideo.
 				</video>
 			</div>
-			<div className='theme-switcher'>
-				<button onClick={() => setTheme('light')}>Light</button>
-				<button onClick={() => setTheme('dark')}>Dark</button>
-				<button onClick={() => setTheme('sepia')}>Sepia</button>
+			<div className='controls'>
+				<ThemeSwitcher setTheme={setTheme} />
+				<DownloadButton videoUrl={currentVideoUrl} />
 			</div>
 		</div>
 	)
