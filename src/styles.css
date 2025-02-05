@@ -1,0 +1,95 @@
+/* Domyślny styl dla body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Motyw Light */
+body.light {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Motyw Dark */
+body.dark {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+/* Motyw Sepia */
+body.sepia {
+    background-color: #f4ecd8;
+    color: #5a4a42;
+}
+
+/* Styl dla kontenera odtwarzacza */
+.video-player {
+    border: 1px outset pink;
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: inherit;
+    /* Tło zgodne z motywem */
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+/* Sztuczka z padding-top dla proporcji 16:9 */
+.video-player::before {
+    content: '';
+    display: block;
+    padding-top: 56.25%;
+    /* 16:9 aspect ratio (9 / 16 * 100) */
+}
+
+/* Styl dla wideo */
+.video-player video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+
+/* Styl dla przycisków zmiany motywu */
+.theme-switcher {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.theme-switcher button {
+    padding: 5px 15px;
+    margin: 0 5px;
+    /* border: none; */
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.theme-switcher button:hover {
+    opacity: 0.9;
+}
+
+/* Kolory przycisków w zależności od motywu */
+body.light .theme-switcher button {
+    background-color: #007bff;
+    color: white;
+    border: 2px outset rgb(0, 0, 0);
+}
+
+body.dark .theme-switcher button {
+    background-color: #555555;
+    color: white;
+    border: 1px outset pink;
+}
+
+body.sepia .theme-switcher button {
+    background-color: #a68b6b;
+    color: white;
+    border: 2px outset rgb(211, 129, 36);
+}
